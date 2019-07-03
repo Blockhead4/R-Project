@@ -83,6 +83,6 @@ for(i in 1:length(pages)) {
 }
 reviews
 
-write.xlsx(reviews, "D:/workspace-Jwp/R/R-Project/01_Crowling/reviews.xlsx")
+# write.xlsx(reviews, "D:/workspace-Jwp/R/R-Project/01_Crowling/reviews.xlsx")
 
 

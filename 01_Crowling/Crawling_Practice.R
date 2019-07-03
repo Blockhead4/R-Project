@@ -50,7 +50,7 @@ for(i in 1:length(page)) {
 }
 anlysis
 
-write.xlsx(anlysis, "D:/workspace-Jwp/R/R-Project/01_Crowling/anlysis.xlsx")
+# write.xlsx(anlysis, "D:/workspace-Jwp/R/R-Project/01_Crowling/anlysis.xlsx")
 
 # 3. 성격테스트 결과 크롤링
 kinds <- c('intj', 'intp','entj','entp','infj','infp','enfj','enfp','istj','isfj','estj','esfj','istp','isfp','estp','esfp')

@@ -49,4 +49,4 @@ for(i in 1:length(url)) {
 }
 computer_books
 
-write.xlsx(computer_books, "D:/workspace-Jwp/R/R-Project/01_Crowling/computer_books.xlsx")
+# write.xlsx(computer_books, "D:/workspace-Jwp/R/R-Project/01_Crowling/computer_books.xlsx")
