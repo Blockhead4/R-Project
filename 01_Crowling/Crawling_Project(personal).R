@@ -51,25 +51,22 @@ points
 
 write.xlsx(points, "D:/workspace-Jwp/R/R-Project/01_Crowling/data/points.xlsx")
 
-
 # WordCloud 
 setwd("D:/workspace-Jwp/R/R-Project/01_Crowling")
 head(points$review)
 reply <- points$review
-
-write.csv(reply, "data/reply.csv", row.names = F, col.names = F)
+write.csv(reply, "data/reply.csv", row.names = F)
 words <- readLines("data/reply.csv")
 
 words <- sapply(words, extractNoun, USE.NAMES = F)
 cdata <- unlist(words)
-
 words <- str_replace_all(cdata, "[^[:alpha:]]", "")
 words <- gsub(" ", "", words)
 words <- gsub("\\d+", "", words)
 words <- Filter(function(x) {nchar(x) >= 2}, words)
-head(words2, 300)  
+head(words, 20)  
 
-write(unlist(words2), "data/reply.txt")
+write(unlist(words), "data/reply.txt")
 rev <- read.table("data/reply.txt")
 rev
 
@@ -89,7 +86,7 @@ write(unlist(words), "data/reply.txt")
 rev <- read.table("data/reply.txt")
 
 wordcount <- table(rev)
-head(sort(wordcount, decreasing = T), 100)
+head(sort(wordcount, decreasing = T), 20)
 
 windows()
 windowsFonts(font=windowsFont("맑은 고딕"))
@@ -105,11 +102,11 @@ wordcloud(names(wordcount), freq=wordcount, scale = c(4,0.4), rot.per = 0.1,
 # Change by Date
 head(points)
 star_date <- select(points, score, time)
-star_date
 
 tmp <- strptime(star_date$time, "%Y.%m.%d %H:%M")
 tmp <- paste0(tmp$mon+1, "월 ", tmp$mday, "일")
 star_date$time <- tmp
+star_date <- filter(star_date, str_sub(star_date$time, 1, 5) != "7월 5일")
 star_date$score <- factor(star_date$score, levels=c(10:1))
 levels(star_date$score)
 
@@ -134,12 +131,12 @@ theme_update(text=element_text(family="myfont"))
 # Bar Chart
 ggplot(data=star_date_bar2, aes(x=time, y=score_freq, fill=score)) + 
   geom_bar(stat="identity") +
-  geom_text(aes(y=ypos, label=ylabel_b), cex=3, color="black", family="myfont") +
+  geom_text(aes(y=ypos, label=ylabel_b), cex=4, color="black", family="myfont") +
   theme_light() +
   xlab("날짜(일)") +
   ylab("평점(1~10점)") +
-  ggtitle("2019 [스파이더맨 : 파 프롬 홈] \n 평점 빈도") +
-  theme(plot.title=element_text(size=rel(2), face="bold", hjust=0.5, family="myfont")) +
+  ggtitle("[스파이더맨 : 파 프롬 홈] \n 평점 빈도(19.07.02 ~ 19.07.04)") +
+  theme(plot.title=element_text(size=rel(1.5), face="bold", hjust=0.5, family="myfont")) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.title.x = element_text(size=rel(1.2), family="myfont"),
@@ -147,12 +144,12 @@ ggplot(data=star_date_bar2, aes(x=time, y=score_freq, fill=score)) +
 
 ggplot(data=star_date_bar2, aes(x=time, y=score_freq, fill=score)) + 
   geom_bar(stat="identity", position="dodge") +
-  geom_text(aes(y=rep(seq(360, 900, 60), 3), label=ylabel_b), cex=4, color="navy", family="myfont") +
   theme_light() +
+  geom_text(aes(y=rep(seq(360, 900, 60), 3), label=ylabel_b), cex=4, color="navy", family="myfont") +
   xlab("날짜(일)") +
   ylab("평점(1~10점)") +
-  ggtitle("2019 [스파이더맨 : 파 프롬 홈] \n 평점 빈도") +
-  theme(plot.title=element_text(size=rel(2), face="bold", hjust=0.5, family="myfont")) +
+  ggtitle("[스파이더맨 : 파 프롬 홈] \n 평점 빈도(19.07.02 ~ 19.07.04)") +
+  theme(plot.title=element_text(size=rel(1.5), face="bold", hjust=0.5, family="myfont")) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.title.x = element_text(size=rel(1.2), family="myfont"),
@@ -169,12 +166,11 @@ star_date_line
 # Line Chart
 ggplot(star_date_line, aes(x=time, y=avg_score, color="red", group=1)) + 
   geom_line(color="red", size=1) +
-  #geom_text(aes(y=rep(seq(360, 900, 60), 3), label=ylabel_b), cex=4, color="navy", family="myfont") +
   theme_light() +
   xlab("날짜(일)") +
   ylab("평점(1~10점)") +
-  ggtitle("2019 [스파이더맨 : 파 프롬 홈] \n 날짜에 따른 평균 평점 변화") +
-  theme(plot.title=element_text(size=rel(2), face="bold", hjust=0.5, family="myfont")) +
+  ggtitle("[스파이더맨 : 파 프롬 홈] \n 날짜에 따른 평점(평균) 변화(19.07.02 ~ 19.07.04)") +
+  theme(plot.title=element_text(size=rel(1.5), face="bold", hjust=0.5, family="myfont")) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.title.x = element_text(size=rel(1.2), family="myfont"),
@@ -186,9 +182,9 @@ star_date2 <- select(points, score, time)
 tmp <- strptime(star_date2$time, "%Y.%m.%d %H:%M")
 tmp <- paste0(tmp$mon+1, "월 ", tmp$mday, "일 ", tmp$hour, "시")
 star_date2$time <- tmp
+star_date2 <- filter(star_date2, str_sub(star_date2$time, 1, 5) != "7월 5일")
 star_date2$score <- as.character(star_date2$score)
 star_date2$score <- as.numeric(star_date2$score)
-star_date2
 
 star_hour_line1 <- star_date2 %>%
   group_by(time) %>%
@@ -200,8 +196,8 @@ ggplot(star_hour_line1, aes(x=time, y=avg_score, group=1)) +
   theme_light() +
   xlab("시간(단위: 1시간)") +
   ylab("평점(1~10점)") +
-  ggtitle("2019 [스파이더맨 : 파 프롬 홈] \n 시간에 따른 평균 평점 변화") +
-  theme(plot.title=element_text(size=rel(2), face="bold", hjust=0.5, family="myfont")) +
+  ggtitle("[스파이더맨 : 파 프롬 홈] \n 시간에 따른 평점(평균) 변화(19.07.02 ~ 19.07.04)") +
+  theme(plot.title=element_text(size=rel(1.5), face="bold", hjust=0.5, family="myfont")) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.title.x = element_text(size=rel(1.2), family="myfont"),
@@ -209,6 +205,9 @@ ggplot(star_hour_line1, aes(x=time, y=avg_score, group=1)) +
         axis.text.x = element_blank())
 
 # Line Chart(4시간 단위)
+star_date2 <- select(points, score, time)
+tmp <- strptime(star_date2$time, "%Y.%m.%d %H:%M")
+
 time_tmp <- rep(NA, length(tmp))
 for(i in 1:length(tmp)) {
   ifelse(tmp$hour[i] <= 4, time_tmp[i] <- paste0(tmp[i]$mon+1, "월 ", tmp[i]$mday, "일 ", "1~4시"),
@@ -221,9 +220,9 @@ for(i in 1:length(tmp)) {
 time_tmp
 
 star_date2$time <- time_tmp
+star_date2 <- filter(star_date2, str_sub(star_date2$time, 1, 5) != "7월 5일")
 star_date2$score <- as.character(star_date2$score)
 star_date2$score <- as.numeric(star_date2$score)
-star_date2
 
 star_hour_line2 <- star_date2 %>%
   group_by(time) %>%
@@ -235,8 +234,8 @@ ggplot(star_hour_line2, aes(x=time, y=avg_score, group=1)) +
   theme_light() +
   xlab("시간(단위: 4시간)") +
   ylab("평점(1~10점)") +
-  ggtitle("2019 [스파이더맨 : 파 프롬 홈] \n 시간에 따른 평균 평점 변화") +
-  theme(plot.title=element_text(size=rel(2), face="bold", hjust=0.5, family="myfont")) +
+  ggtitle("[스파이더맨 : 파 프롬 홈] \n 시간에 따른 평점(평균) 변화(19.07.02 ~ 19.07.04)") +
+  theme(plot.title=element_text(size=rel(1.5), face="bold", hjust=0.5, family="myfont")) +
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         axis.title.x = element_text(size=rel(1.2), family="myfont"),
