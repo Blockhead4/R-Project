@@ -9,8 +9,21 @@
 - 선진국(or 출산율 높은 국가) 0세아 or 어린이집 비율
 - 어린이집 정보 공유 맘카페 크롤링
 - 참고 웹사이트 :
-	[ https://news.joins.com/article/16972466 ]
-	[ http://www.hemophilia.co.kr/news/articleView.html?idxno=11223 ]
+	
+	< 뉴스 자료 >
+
+	*   [ https://news.joins.com/article/16972466 ]
+	*** [ http://www.hemophilia.co.kr/news/articleView.html?idxno=11223 ]
+	*** [ http://news1.kr/articles/?3498567 ]
+	*** [ https://news.joins.com/article/23428042 ]
+	*** [ http://www.hani.co.kr/arti/economy/economy_general/826038.html ]
+	*** [ https://www.mk.co.kr/news/society/view/2018/07/424920/ ]
+	*** [ http://www.yangpatv.kr/news/articleView.html?idxno=13723 ]
+	*** [ https://www.yna.co.kr/view/AKR20150120107800017 ]
+
+	< 서울 연구원 통계 자료 >
+
+	*** [ https://www.si.re.kr/search/node?keys=%EC%B6%9C%EC%82%B0&type%5B%5D=infographics&ptimes=total&created%5Bmin%5D=&created%5Bmax%5D= ]
 
 
 2. 분석 기준 설정(입지 선정 기준)
@@ -22,6 +35,10 @@
 - 접근성(20분 이내 거리, 교통 수월 여부)
 - 저소득 지역 파악
 - 어린이 관련 복지시설
+- 신혼 부부 중 직업여성 비율
+- 맞벌이 가구 통계
+- 맞벌이 가구 출산율
+
 
 3. 고려해야 할 부분
 - 가중치 부여 여부
@@ -60,6 +77,25 @@
 	[ 각종 재난, 치안 및 안전 등에 대한 지도 표시 정보 제공 ]
  - 국가통계포털(KOSIS) :
 	[ 어린이집 및 이용자 통계 / 아동복지시설수 및 보호아동현황(시도별) / 그 외 교육통계, 주택통계 등 ]
+
+
+
+
+< 빅데이터 센터 이용날짜 >
+
+1) 2019-07-08 : 대전     
+
+2) 2019-07-15 : 대전  
+
+3) 2019-07-17 : 대전    
+
+4) 2019-07-18 : 대전      
+
+5) 2019-07-22 : 대전      
+
+6) 2019-07-24 : 대전  
+
+7) 2019-07-29 : 대전    
 
 	
 	
