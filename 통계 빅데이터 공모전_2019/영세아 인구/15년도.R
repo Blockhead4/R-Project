@@ -34,20 +34,36 @@ sdata2$X2세 <- as.numeric(sdata2$X2세)
 sdata2$X3세 <- as.numeric(sdata2$X3세)
 str(sdata2)
 
-sdata2 <- sdata2 %>%
+gu <- sdata2 %>%
   group_by(자치구) %>%
   summarise_each(funs(mean), X0세, X1세, X2세, X3세) %>%
   arrange(desc(X0세, X1세, X2세, X3세))
-sdata2
+gu
 
-sdata3 <- sdata2 %>%
+gu_all <- gu %>%
   mutate("영세아" = X0세+X1세+X2세+X3세) %>%
   arrange(desc(영세아))
-sdata3
+gu_all
 
 #head(sdata2)
 head(sdata3)
 
+
+#ggplot(sdata2, aes(자치구, X0세, fill=자치구)) +  geom_col()
+#ggplot(sdata3, aes(자치구, 영세아, fill=자치구)) +  geom_col()
+
+
+# 동별 분포
+dong <- sdata2 %>%
+  group_by(자치구, 행정동) %>%
+  summarise_each(funs(mean), X0세, X1세, X2세, X3세) %>%
+  arrange(자치구, 행정동, desc(X0세, X1세, X2세, X3세))
+dong
+
+dong_all <- dong %>%
+  mutate("영세아" = X0세+X1세+X2세+X3세) %>%
+  arrange(desc(영세아))
+dong_all
 
 #ggplot(sdata2, aes(자치구, X0세, fill=자치구)) +  geom_col()
 #ggplot(sdata3, aes(자치구, 영세아, fill=자치구)) +  geom_col()
